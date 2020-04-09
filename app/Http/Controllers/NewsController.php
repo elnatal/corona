@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// use Request;
 use App\News;
 
 class NewsController extends Controller
@@ -12,9 +13,24 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return News::all();
+        $news = News::orderBy('id', 'desc')->paginate(20);
+        if ($request->is('api/*')) {
+            return $news;
+        } else {
+            return view('pages.news.list', compact('news'));
+        }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('pages.news.add');
     }
 
 
@@ -26,7 +42,13 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        return News::create($request->all());
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required'
+        ]);
+        News::create($request->all());
+
+        return redirect('/news');
     }
 
     /**
@@ -41,6 +63,18 @@ class NewsController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $news = News::findOrFail($id);
+        return view('pages.news.edit', compact('news'));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -52,7 +86,7 @@ class NewsController extends Controller
         $news = News::findOrFail($id);
         $news->update($request->all());
 
-        return $news;
+        return redirect('/news');
     }
 
     /**

@@ -12,11 +12,25 @@ class EmergencyContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return EmergencyContact::all();
+        $emergencyContact = EmergencyContact::orderBy('id', 'desc')->paginate(20);
+        if ($request->is('api/*')) {
+            return $emergencyContact;
+        } else {
+            return view('pages.emergency_contact.list', compact('emergencyContact'));
+        }
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('pages.emergency_contact.add');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -26,7 +40,9 @@ class EmergencyContactController extends Controller
      */
     public function store(Request $request)
     {
-        return EmergencyContact::create($request->all());
+        EmergencyContact::create($request->all());
+
+        return redirect('/emergency-contact');
     }
 
     /**
@@ -41,6 +57,18 @@ class EmergencyContactController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $emergencyContact = EmergencyContact::findOrFail($id);
+        return view('pages.emergency_contact.edit', compact('emergencyContact'));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -52,7 +80,7 @@ class EmergencyContactController extends Controller
         $emergencyContact = EmergencyContact::findOrFail($id);
         $emergencyContact->update($request->all());
 
-        return $emergencyContact;
+        return redirect('/emergency-contact');
     }
 
     /**

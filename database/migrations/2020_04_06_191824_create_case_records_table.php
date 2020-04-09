@@ -15,6 +15,8 @@ class CreateCaseRecordsTable extends Migration
     {
         Schema::create('case_records', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
+            $table->string('description');
             $table->timestamps();
         });
     }

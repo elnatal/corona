@@ -12,9 +12,14 @@ class CaseRecordController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return CaseRecord::all();
+        $cases = CaseRecord::orderBy('id', 'desc')->paginate(20);
+        if ($request->is('api/*')) {
+            return $cases;
+        } else {
+            return view('pages.case_records', compact('cases'));
+        }
     }
 
 
