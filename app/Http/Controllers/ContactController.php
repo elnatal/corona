@@ -26,7 +26,23 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        return Contact::create($request->all());
+        $request->validate([
+            'contacts' => 'required'
+        ]);
+
+        for ($i=0; $i < count($request->get('contacts')); $i++) { 
+            $data = $request->get('contacts')[$i];
+            $contact = new Contact();
+
+            $contact->length = $data['length'];
+            $contact->user1 = $data['user1'];
+            $contact->user2 = $data['user2'];
+            $contact->lat = $data['lat'];
+            $contact->long = $data['long'];
+            $contact->time = $data['time'];
+            $contact->save();
+        }
+        return 200;
     }
 
     /**
