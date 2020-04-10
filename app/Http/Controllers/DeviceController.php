@@ -22,6 +22,14 @@ class DeviceController extends Controller
         }
     }
 
+    public function search(Request $request)
+    {
+        $value = $request->input('q');
+        $devices = Device::where('name', 'LIKE', '%' . $value . '%')->orWhere('phone', 'LIKE', '%' . $value . '%')->orWhere('mac_address', 'LIKE', '%' . $value . '%')->orderBy('id', 'desc')->limit(20)->get();
+
+        return view('pages.finder', compact('devices'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *

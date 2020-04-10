@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contact;
+use Carbon\Carbon;
 
 class ContactController extends Controller
 {
@@ -51,9 +52,16 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function contact($id)
     {
-        return Contact::find($id);
+        $contacts = Contact::where('user1', $id)->paginate(20);
+        return view('pages.contact', compact('contacts'));
+    }
+
+    public function heatmap()
+    {
+        $contacts = Contact::whereDate('created_at', '>=', Carbon::today()->subDay()->toDateString())->get();
+        return view('pages.heatmap', compact('contacts'));
     }
 
     /**

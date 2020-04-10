@@ -4,13 +4,15 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src="{{ asset('js/leaflet.js') }}"></script>
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />
+    {{-- <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" /> --}}
   </head>
   <body>
     <div class="container-scroller">
@@ -29,7 +31,7 @@
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
-                  <img src="{{ asset('images/faces/face1.jpg') }}" alt="image">
+                  <img src="https://p7.hiclipart.com/preview/340/956/944/computer-icons-user-profile-head-ico-download.jpg" alt="image">
                   <span class="availability-status online"></span>
                 </div>
                 <div class="nav-profile-text">
@@ -56,7 +58,7 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="nav-profile-image">
-                  <img src="{{ asset('images/faces/face1.jpg') }}" alt="profile">
+                  <img src="https://p7.hiclipart.com/preview/340/956/944/computer-icons-user-profile-head-ico-download.jpg" alt="profile">
                   <span class="login-status online"></span>
                   <!--change to offline or busy as needed-->
                 </div>
@@ -92,6 +94,18 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="/search">
+                <span class="menu-title">Finder</span>
+                <i class="mdi mdi-account-search  menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/heatmap">
+                <span class="menu-title">Heat map</span>
+                <i class="mdi mdi-map menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/case-records">
                 <span class="menu-title">Case Record</span>
                 <i class="mdi mdi-record-rec menu-icon"></i>
@@ -121,8 +135,8 @@
     <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('js/off-canvas.js') }}"></script>
+    <script src="{{ asset('js/misc.js') }}">
     <script src="{{ asset('js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('js/misc.js') }}"></script>
-    <script src="{{ asset('js/todolist.js') }}"></script>
+    @yield('script')
   </body>
 </html>

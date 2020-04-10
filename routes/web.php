@@ -37,4 +37,8 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/devices', 'DeviceController@index')->name('devices');
     
     Route::get('/case-records', 'CaseRecordController@index')->name('cases');
+    
+    Route::get('/search', 'DeviceController@search')->name('search');
+    Route::get('/contact/{id}', 'ContactController@contact')->name('contact');
+    Route::get('/heatmap', 'ContactController@heatmap')->name('heatmap');
 });
