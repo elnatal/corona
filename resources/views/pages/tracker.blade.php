@@ -6,7 +6,7 @@
       <h3 class="page-title">
         <span class="page-title-icon bg-gradient-primary text-white mr-2">
           <i class="mdi mdi-record-rec"></i>
-        </span> Case records </h3>
+        </span> Tracker </h3>
     </div>
 
     <div class="row">
@@ -16,17 +16,19 @@
             <table class="table">
               <thead>
                 <tr>
-                  {{-- <th>Name</th>
+                  <th>Name</th>
                   <th>phone number</th>
-                  <th>status</th> --}}
+                  <th>status</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-                  @foreach ($cases as $case)
+                  @foreach ($devices as $device)
                     <tr>
-                        {{-- <td>{{ $device->name }}</td>
+                        <td>{{ $device->name }}</td>
                         <td>{{ $device->phone }}</td>
-                        <td>{{ $device->status }}</td> --}}
+                        <td><label class="badge badge-secondary">@if($device->status == '1') Normal @endif @if($device->status == '2') Infected @endif @if($device->status == '3') Dead @endif @if($device->status == '4') Recovered @endif </label></td>
+                        <td><a href="/contact/{{ $device->id }}"><i class="mdi mdi-lan-connect menu-icon"></i></a></td>
                     </tr>
                   @endforeach
               </tbody>
@@ -34,7 +36,7 @@
             
             <div class="col-md-12">
                 <div class="float-right">
-                    {{ $cases->links() }}
+                    {{ $devices->links() }}
                 </div>
             </div>
           </div>

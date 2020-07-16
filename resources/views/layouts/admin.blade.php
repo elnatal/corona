@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="{{ asset('vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-    <script src="{{ asset('js/leaflet.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/leaflet.css') }}">
     <!-- End layout styles -->
     {{-- <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" /> --}}
   </head>
@@ -88,12 +87,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/devices">
-                <span class="menu-title">Devices</span>
-                <i class="mdi mdi-cellphone-android menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="/search">
                 <span class="menu-title">Finder</span>
                 <i class="mdi mdi-account-search  menu-icon"></i>
@@ -106,8 +99,8 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/case-records">
-                <span class="menu-title">Case Record</span>
+              <a class="nav-link" href="/tracker">
+                <span class="menu-title">Tracker</span>
                 <i class="mdi mdi-record-rec menu-icon"></i>
               </a>
             </li>
@@ -135,8 +128,9 @@
     <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('js/off-canvas.js') }}"></script>
-    <script src="{{ asset('js/misc.js') }}">
+    <script src="{{ asset('js/misc.js') }}"></script>
     <script src="{{ asset('js/hoverable-collapse.js') }}"></script>
+    <script src="{{ asset('js/leaflet.js') }}"></script>
     @yield('script')
   </body>
 </html>

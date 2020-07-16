@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::middleware(['web', 'auth'])->group(function () {
-    Route::get('/', function () {
-        return view('pages.dashboard');
-    });
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+
     Route::get('/news', 'NewsController@index')->name('news');
     Route::get('/news/add', 'NewsController@create')->name('add-news');
     Route::post('/news', 'NewsController@store')->name('store-news');
@@ -35,8 +34,9 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::delete('/emergency-contact/{id}', 'EmergencyContactController@destroy')->name('delete-emergency-contact');
 
     Route::get('/devices', 'DeviceController@index')->name('devices');
+    Route::post('/devices/{id}', 'DeviceController@update')->name('update-device');
     
-    Route::get('/case-records', 'CaseRecordController@index')->name('cases');
+    Route::get('/tracker', 'DeviceController@tracker')->name('tracker');
     
     Route::get('/search', 'DeviceController@search')->name('search');
     Route::get('/contact/{id}', 'ContactController@contact')->name('contact');

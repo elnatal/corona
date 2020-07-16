@@ -18,13 +18,13 @@
                 <tr>
                   <th>Name</th>
                   <th>length</th>
-                  <th>time</th>
+                  <th>date</th>
                 </tr>
               </thead>
               <tbody>
                   @foreach ($contacts as $contact)
                     <tr>
-                        <td>{{ ($contact->user()) ? $contact->user()->name : $contact->user2 }}</td>
+                        <td>{{ ($contact->user) ? $contact->user->name : $contact->user2 }}</td>
                         <td>{{ $contact->length }}</td>
                         <td>{{ $contact->time }}</td>
                     </tr>
@@ -32,11 +32,11 @@
               </tbody>
             </table>
             
-            <div class="col-md-12">
+            {{-- <div class="col-md-12">
                 <div class="float-right">
                     {{ $contacts->links() }}
                 </div>
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>

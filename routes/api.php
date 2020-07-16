@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::post('liklyhood', 'DeviceController@likly');
+
 Route::get('caseRecord', 'CaseRecordController@index');
 
 Route::get('contact', 'ContactController@index');

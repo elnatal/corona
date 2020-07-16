@@ -31,6 +31,8 @@ class ContactController extends Controller
             'contacts' => 'required'
         ]);
 
+        // dd($request);
+
         for ($i=0; $i < count($request->get('contacts')); $i++) { 
             $data = $request->get('contacts')[$i];
             $contact = new Contact();
@@ -40,7 +42,7 @@ class ContactController extends Controller
             $contact->user2 = $data['user2'];
             $contact->lat = $data['lat'];
             $contact->long = $data['long'];
-            $contact->time = $data['time'];
+            $contact->time = Carbon::now();
             $contact->save();
         }
         return 200;
@@ -54,7 +56,8 @@ class ContactController extends Controller
      */
     public function contact($id)
     {
-        $contacts = Contact::where('user1', $id)->paginate(20);
+        $contacts = Contact::where('user1', $id)->get()->unique('user1');
+        // dd($contacts);
         return view('pages.contact', compact('contacts'));
     }
 

@@ -41,8 +41,32 @@
                     <tr>
                         <td>{{ $device->name }}</td>
                         <td>{{ $device->phone }}</td>
-                        <td>{{ $device->status }}</td>
-                        <td><a href="/contact/{{ $device->id }}"><i class="mdi mdi-lan-connect menu-icon"></i></a></td>
+                        <td><label class="badge badge-secondary">@if($device->status == '1') Normal @endif @if($device->status == '2') Infected @endif @if($device->status == '3') Dead @endif @if($device->status == '4') Recovered @endif </label></td>
+                        <td>
+                          <a href="/contact/{{ $device->id }}"><i class="mdi mdi-lan-connect menu-icon"></i></a>
+                          <a href="#" class="btn btn-primary btn-sm" onclick="event.preventDefault();
+                            document.getElementById('infected-form{{$device->id}}').submit();">Infected</a>
+                          <form id="infected-form{{$device->id}}" action="{{ route('update-device', $device->id) }}" method="POST" style="display: none;">
+                            @csrf
+                            <input type="text" name="status" id="status" value="2">
+                        </form>
+
+                        <a href="#" class="btn btn-success btn-sm" onclick="event.preventDefault();
+                            document.getElementById('recover-form{{$device->id}}').submit();">Recovered</a>
+
+                        <form id="recover-form{{$device->id}}" action="{{ route('update-device', $device->id) }}" method="POST" style="display: none;">
+                          @csrf
+                          <input type="text" name="status" id="status" value="4">
+                        </form>
+
+                        
+                        <a href="#" class="btn btn-danger btn-sm" onclick="event.preventDefault();
+                        document.getElementById('dead-form{{$device->id}}').submit();">Dead</a>
+                        <form id="dead-form{{$device->id}}" action="{{ route('update-device', $device->id) }}" method="POST" style="display: none;">
+                          @csrf
+                          <input type="text" name="status" id="status" value="3">
+                      </form>
+                        </td>
                     </tr>
                   @endforeach
               </tbody>

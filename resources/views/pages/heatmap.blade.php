@@ -14,7 +14,7 @@
 
 @section('script')
 
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="{{ asset('js/leaflet.js') }}"></script>
 <script src="{{ asset('js/heatmap.js') }}"></script>
 <script src="{{ asset('js/leaflet-heatmap.js') }}"></script>
 
@@ -49,7 +49,7 @@
 
       var cfg = {
         // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-        "radius": .001,
+        "radius": .007,
         "maxOpacity": .8, 
         // scales the radius based on map zoom
         "scaleRadius": true, 
